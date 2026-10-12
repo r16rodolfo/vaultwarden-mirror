@@ -41,7 +41,7 @@ jobs:
           latest_tag() {
             local repo="$1" regex="$2"
             for page in 1 2; do
-              curl -fsSL "https://hub.docker.com/v2/repositories/${repo}/tags?page_size=100&page=${page}&ordering=last_updated" \
+              curl -fsL "https://hub.docker.com/v2/repositories/${repo}/tags?page_size=100&page=${page}&ordering=last_updated" \
                 | jq -r '.results[].name' || true
             done | grep -E "$regex" | sort -V | tail -n1 || true
           }
